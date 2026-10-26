@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unlimited TopUp Admin</title>
+    <meta name="description" content="Admin dashboard and management panel for Unlimited TopUp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-body">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-box">
+          <div class="brand-mark">
+            <span class="helmet"></span>
+            <span class="light"></span>
+          </div>
+          <div class="brand-copy">
+            <strong>Unlimited</strong>
+            <span>TopUp</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Sidebar navigation">
+          <button class="nav-item active" data-section="overview">
+            <span>▣</span>
+            <span>Overview</span>
+          </button>
+          <button class="nav-item" data-section="orders">
+            <span>🧾</span>
+            <span>Orders</span>
+          </button>
+          <button class="nav-item" data-section="users">
+            <span>👥</span>
+            <span>Users</span>
+          </button>
+          <button class="nav-item" data-section="payments">
+            <span>💳</span>
+            <span>Payments</span>
+          </button>
+          <button class="nav-item" data-section="products">
+            <span>📦</span>
+            <span>Products</span>
+          </button>
+          <button class="nav-item" data-section="banners">
+            <span>📣</span>
+            <span>Notice & Banners</span>
+          </button>
+          <button class="nav-item" data-section="security">
+            <span>🔐</span>
+            <span>Security</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="status-pill online">
+            <span class="dot"></span>
+            System Live
+          </div>
+        </div>
+      </aside>
+
+      <div class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="topbar-kicker">Management Console</p>
+            <h1>Administrator Dashboard</h1>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="icon-btn" aria-label="Notifications">🔔</button>
+            <div class="profile-pill">
+              <div class="avatar">AS</div>
+              <div class="profile-meta">
+                <strong>Admin Staff</strong>
+                <small>superadmin@topupbd.com</small>
+              </div>
+            </div>
+            <button class="btn btn-ghost logout-btn">Logout</button>
+          </div>
+        </header>
+
+        <main class="content-wrap">
+          <section id="overview" class="page-section active">
+            <div class="page-head">
+              <div>
+                <span class="page-tag">Overview</span>
+                <h2>Welcome back, Admin</h2>
+              </div>
+              <button class="btn btn-primary" data-open-modal="productModal">New Product</button>
+            </div>
+
+            <div class="stats-grid" id="statsGrid"></div>
+
+            <div class="chart-grid">
+              <div class="panel-card">
+                <div class="panel-head">
+                  <h3>Sales Overview</h3>
+                  <span class="trend up">+18.6%</span>
+                </div>
+                <div class="chart-box line-chart" aria-label="Sales chart">
+                  <svg viewBox="0 0 420 180" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="salesFill" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stop-color="#e11d48" stop-opacity="0.22"/>
+                        <stop offset="100%" stop-color="#e11d48" stop-opacity="0.01"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0 150 C40 130, 90 140, 120 100 S180 70, 220 80 S290 30, 320 60 S380 70, 420 25 L420 180 L0 180 Z" fill="url(#salesFill)"/>
+                    <path d="M0 150 C40 130, 90 140, 120 100 S180 70, 220 80 S290 30, 320 60 S380 70, 420 25" fill="none" stroke="#e11d48" stroke-width="4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="panel-card">
+                <div class="panel-head">
+                  <h3>Order Status</h3>
+                  <span class="trend neutral">Live</span>
+                </div>
+                <div class="donut-wrap">
+                  <div class="donut-chart">
+                    <div class="donut-center">
+                      <strong>1,248</strong>
+                      <small>Orders</small>
+                    </div>
+                  </div>
+                  <ul class="legend-list">
+                    <li><span class="legend-dot green"></span> Approved <strong>62%</strong></li>
+                    <li><span class="legend-dot amber"></span> Pending <strong>24%</strong></li>
+                    <li><span class="legend-dot red"></span> Cancelled <strong>14%</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-card table-panel">
+              <div class="panel-head">
+                <h3>Recent Orders</h3>
+                <button class="text-btn" data-section="orders">View all</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>User</th>
+                      <th>Package</th>
+                      <th>Amount</th>
+                      <th>Method</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentOrdersTable"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="orders" class="page-section">
+            <div class="page-head">
+              <div>
+                <span class="page-tag">Orders</span>
+                <h2>Order Management</h2>
+              </div>
+              <button class="btn btn-primary" data-open-modal="orderModal">Add Order</button>
+            </div>
+
+            <div class="panel-card table-panel">
+              <div class="panel-head flex-head">
+                <h3>All Top-Up Orders</h3>
+                <div class="actions-group">
+                  <input type="search" class="search-box" id="orderSearch" placeholder="Search order..." />
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>User Name</th>
+                      <th>Game UID</th>
+                      <th>Package</th>
+                      <th>Amount</th>
+                      <th>Payment</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ordersTable"></tbody>
+                </table>
+              </div>
+              <div class="pagination-row" id="ordersPagination"></div>
+            </div>
+          </section>
+
+          <section id="users" class="page-section">
+            <div class="page-head">
+              <div>
+                <span class="page-tag">Users</span>
+                <h2>User Management</h2>
+              </div>
+              <button class="btn btn-primary" data-open-modal="userModal">Add User</button>
+            </div>
+
+            <div class="panel-card table-panel">
+              <div class="panel-head flex-head">
+                <h3>Registered Customers</h3>
+                <div class="actions-group">
+                  <input type="search" class="search-box" id="userSearch" placeholder="Search user..." />
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Wallet</th>
+                      <th>Joined</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="usersTable"></tbody>
+                </table>
+              </div>
+              <div class="pagination-row" id="usersPagination"></div>
+            </div>
+          </section>
+
+          <section id="payments" class="page-section">
+            <div class="page-head">
+              <div>
+                <span class="page-tag">Payments</span>
+                <h2>Add Money Verification</h2>
+              </div>
+            </div>
+
+            <div class="panel-card table-panel">
+              <div class="panel-head">
+                <h3>Manual Deposit Requests</h3>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>TrxID</th>
+                      <th>User</th>
+                      <th>Sender</th>
+                      <th>Method</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="paymentsTable"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section id="products" class="page-section">
+            <div class="page-head">
+              <div>
+                <span class="page-tag">Products</span>
+                <h2>Package Management</h2>
+              </div>
+              <button class="btn btn-primary" data-open-modal="productModal">Add Package</button>
+            </div>
+
+            <div class="product-manage-grid" id="productsGrid"></div>
+          </section>
+
+          <section id="banners" class="page-section">
+            <div class="page-head">
+              <div>
+                <span class="page-tag">Notice & Banners</span>
+                <h2>Homepage Configuration</h2>
+              </div>
+              <button class="btn btn-primary" id="saveNoticeBtn">Save Changes</button>
+            </div>
+
+            <div class="config-grid">
+              <div class="panel-card">
+                <div class="panel-head">
+                  <h3>Scrolling Notice</h3>
+                </div>
+                <label class="field-block">
+                  <span>Homepage Notice Text</span>
+                  <textarea id="noticeText" rows="5">🎉 সেরা ডেলিভারি, নিরাপদ পেমেন্ট, ২৪/৭ সাপোর্ট — Unlimited TopUp এ আজই অর্ডার করুন!</textarea>
+                </label>
+              </div>
+
+              <div class="panel-card">
+                <div class="panel-head">
+                  <h3>Promotional Banner</h3>
+                </div>
+                <form id="bannerForm" class="stack-form">
+                  <label class="field-block">
+                    <span>Banner Title</span>
+                    <input type="text" id="bannerTitle" value="Free Fire Diamond Offer" />
+                  </label>
+                  <label class="field-block">
+                    <span>Banner Subtitle</span>
+                    <input type="text" id="bannerSubtitle" value="Get up to 30% off on premium offers" />
+                  </label>
+                  <label class="field-block">
+                    <span>CTA Label</span>
+                    <input type="text" id="bannerCta" value="Shop Now" />
+                  </label>
+                  <label class="checkbox-row">
+                    <input type="checkbox" id="bannerActive" checked />
+                    <span>Banner is active</span>
+                  </label>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <section id="security" class="page-section">
+            <div class="page-head">
+              <div>
+                <span class="page-tag">Security</span>
+                <h2>Access Control</h2>
+              </div>
+            </div>
+
+            <div class="security-grid">
+              <div class="panel-card">
+                <div class="panel-head">
+                  <h3>Session Security</h3>
+                </div>
+                <ul class="info-list">
+                  <li><strong>Login status:</strong> Verified</li>
+                  <li><strong>Protected routes:</strong> Enabled</li>
+                  <li><strong>Last session:</strong> Today, 09:48 AM</li>
+                  <li><strong>Session timeout:</strong> 30 minutes</li>
+                </ul>
+              </div>
+
+              <div class="panel-card">
+                <div class="panel-head">
+                  <h3>Admin Logs</h3>
+                </div>
+                <ul class="activity-list">
+                  <li>Updated product pricing — 10 minutes ago</li>
+                  <li>Approved deposit request TRX-4091 — 18 minutes ago</li>
+                  <li>Blocked user — 1 hour ago</li>
+                  <li>Updated homepage notice — 2 hours ago</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div class="modal" id="orderModal" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h3>Order Form</h3>
+          <button class="close-modal" type="button" aria-label="Close modal">×</button>
+        </div>
+        <form class="modal-form" id="orderForm">
+          <label>
+            <span>User Name</span>
+            <input type="text" name="userName" placeholder="e.g. Sakib Ahmed" />
+          </label>
+          <label>
+            <span>Game UID</span>
+            <input type="text" name="gameUid" placeholder="e.g. 987654321" />
+          </label>
+          <label>
+            <span>Package</span>
+            <input type="text" name="packageName" placeholder="e.g. 25 Diamond" />
+          </label>
+          <label>
+            <span>Amount</span>
+            <input type="number" name="amount" placeholder="৳" />
+          </label>
+          <label>
+            <span>Payment Method</span>
+            <select name="method">
+              <option>bKash</option>
+              <option>Nagad</option>
+              <option>Rocket</option>
+              <option>Visa</option>
+            </select>
+          </label>
+          <label>
+            <span>Status</span>
+            <select name="status">
+              <option>Approved</option>
+              <option>Processing</option>
+              <option>Pending</option>
+              <option>Cancelled</option>
+            </select>
+          </label>
+          <div class="modal-actions">
+            <button class="btn btn-ghost close-modal" type="button">Cancel</button>
+            <button class="btn btn-primary" type="submit">Save Order</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="userModal" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h3>User Form</h3>
+          <button class="close-modal" type="button" aria-label="Close modal">×</button>
+        </div>
+        <form class="modal-form" id="userForm">
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" placeholder="Full name" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="name@example.com" />
+          </label>
+          <label>
+            <span>Phone</span>
+            <input type="tel" name="phone" placeholder="+880..." />
+          </label>
+          <label>
+            <span>Wallet Balance</span>
+            <input type="number" name="wallet" placeholder="৳" />
+          </label>
+          <div class="modal-actions">
+            <button class="btn btn-ghost close-modal" type="button">Cancel</button>
+            <button class="btn btn-primary" type="submit">Save User</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="productModal" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h3>Package Form</h3>
+          <button class="close-modal" type="button" aria-label="Close modal">×</button>
+        </div>
+        <form class="modal-form" id="productForm">
+          <label>
+            <span>Package Name</span>
+            <input type="text" name="productName" placeholder="Weekly Membership" />
+          </label>
+          <label>
+            <span>Category</span>
+            <select name="category">
+              <option>Diamonds</option>
+              <option>Memberships</option>
+              <option>Likes</option>
+              <option>Level Up</option>
+            </select>
+          </label>
+          <label>
+            <span>Price</span>
+            <input type="number" name="price" placeholder="৳" />
+          </label>
+          <label>
+            <span>Discount Tag</span>
+            <input type="text" name="discount" placeholder="Hot, New, Best Value" />
+          </label>
+          <label>
+            <span>Status</span>
+            <select name="active">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </label>
+          <div class="modal-actions">
+            <button class="btn btn-ghost close-modal" type="button">Cancel</button>
+            <button class="btn btn-primary" type="submit">Save Package</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

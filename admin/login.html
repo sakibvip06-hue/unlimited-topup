@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login | Unlimited TopUp</title>
+    <meta name="description" content="Secure admin authentication for Unlimited TopUp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="auth-body">
+    <div class="auth-card-wrap">
+      <div class="auth-card login-card">
+        <div class="auth-header">
+          <div class="brand-box auth-brand">
+            <div class="brand-mark">
+              <span class="helmet"></span>
+              <span class="light"></span>
+            </div>
+            <div class="brand-copy">
+              <strong>Unlimited</strong>
+              <span>TopUp</span>
+            </div>
+          </div>
+          <span class="security-badge">Secure Admin Access</span>
+        </div>
+
+        <div class="auth-copy">
+          <h1>Admin Login</h1>
+          <p>Enter your credentials to access the management panel securely.</p>
+        </div>
+
+        <form id="adminLoginForm" class="auth-form">
+          <label>
+            <span>Email</span>
+            <input id="adminEmail" type="email" placeholder="admin@unlimitedtopup.com" required />
+          </label>
+
+          <label>
+            <span>Password</span>
+            <input id="adminPassword" type="password" placeholder="Enter password" required />
+          </label>
+
+          <div class="login-options">
+            <label class="checkbox-row">
+              <input type="checkbox" />
+              <span>Remember session</span>
+            </label>
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <p id="authError" class="auth-error" hidden>Invalid admin credentials.</p>
+          <button class="btn btn-primary full-width" type="submit">Login to Dashboard</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
